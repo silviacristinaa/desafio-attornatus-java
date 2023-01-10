@@ -1,20 +1,11 @@
 package com.github.silviacristinaa.attornatustestjava.services.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
+import com.github.silviacristinaa.attornatustestjava.dtos.requests.PersonRequestDto;
+import com.github.silviacristinaa.attornatustestjava.dtos.responses.PersonResponseDto;
+import com.github.silviacristinaa.attornatustestjava.entities.Address;
+import com.github.silviacristinaa.attornatustestjava.entities.Person;
 import com.github.silviacristinaa.attornatustestjava.exceptions.NotFoundException;
+import com.github.silviacristinaa.attornatustestjava.repositories.PersonRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,11 +17,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.github.silviacristinaa.attornatustestjava.dtos.requests.PersonRequestDto;
-import com.github.silviacristinaa.attornatustestjava.dtos.responses.PersonResponseDto;
-import com.github.silviacristinaa.attornatustestjava.entities.Address;
-import com.github.silviacristinaa.attornatustestjava.entities.Person;
-import com.github.silviacristinaa.attornatustestjava.repositories.PersonRepository;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class PersonServiceImplTest {

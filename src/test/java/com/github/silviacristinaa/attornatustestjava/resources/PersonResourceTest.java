@@ -2,7 +2,6 @@ package com.github.silviacristinaa.attornatustestjava.resources;
 
 import com.github.silviacristinaa.attornatustestjava.dtos.requests.PersonRequestDto;
 import com.github.silviacristinaa.attornatustestjava.dtos.responses.PersonResponseDto;
-import com.github.silviacristinaa.attornatustestjava.entities.Address;
 import com.github.silviacristinaa.attornatustestjava.entities.Person;
 import com.github.silviacristinaa.attornatustestjava.exceptions.NotFoundException;
 import com.github.silviacristinaa.attornatustestjava.services.PersonService;
@@ -25,7 +24,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
