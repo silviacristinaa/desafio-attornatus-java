@@ -13,6 +13,5 @@ public class AddressResponseDto {
 	private String zipCode;
 	private Long number;
 	private String city;
-	private Person person;
 	private boolean isMain;
 }

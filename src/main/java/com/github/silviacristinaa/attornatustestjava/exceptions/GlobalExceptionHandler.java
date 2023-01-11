@@ -18,12 +18,14 @@ public class GlobalExceptionHandler {
 	private static final String EXCEPTION_MSG_UNEXPECTED_ERROR = "Unexpected error";
 	private static final String EXCEPTION_MSG_ARGUMENTS_NOT_VALID = "Arguments not valid";
 	private static final String NOT_FOUND_MSG = "Not found";
-	
+
+	private static final String BAD_REQUEST = "Bad request";
+
 	private static final String EXCEPTION_LOG_MSG = "e=%s,m=%s";
 	
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	public ResponseEntity<ErrorMessage> processException(final Exception ex) {
+	public ResponseEntity<ErrorMessage> handleMethodException(final Exception ex) {
 		logE(ex);
 		
 		return new ResponseEntity<>(ErrorMessage.builder().message(EXCEPTION_MSG_UNEXPECTED_ERROR)
@@ -32,7 +34,7 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public ResponseEntity<ErrorMessage> handleMethodArgumentBadRequestException(final MethodArgumentNotValidException ex) {
+	public ResponseEntity<ErrorMessage> handleMethodBadRequestException(final MethodArgumentNotValidException ex) {
 		logE(ex);
 		
 		return new ResponseEntity<>(ErrorMessage.builder().message(EXCEPTION_MSG_ARGUMENTS_NOT_VALID)
@@ -40,12 +42,21 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(NotFoundException.class)
-	public ResponseEntity<ErrorMessage> handleMethodArgumentNotFoundException(final NotFoundException ex) {
+	public ResponseEntity<ErrorMessage> handleMethodNotFoundException(final NotFoundException ex) {
 		logE(ex);
 		
 		final ErrorMessage errorMessage = ErrorMessage.builder().message(NOT_FOUND_MSG)
 				.errors(Arrays.asList(ex.getMessage())).build();
 		return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(BadRequestException.class)
+	public ResponseEntity<ErrorMessage> handleMethodBadRequestException(final BadRequestException ex) {
+		logE(ex);
+
+		final ErrorMessage errorMessage = ErrorMessage.builder().message(BAD_REQUEST)
+				.errors(Arrays.asList(ex.getMessage())).build();
+		return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 	}
 	
 	private static void logE(final Exception e) {

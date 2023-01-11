@@ -64,7 +64,7 @@ public class PersonServiceImpl implements PersonService{
 		 return page;
 	}
 	
-	private Person findById(Long id) throws NotFoundException {
+	public Person findById(Long id) throws NotFoundException {
 		return personRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(String.format(PERSON_NOT_FOUND, id)));				
 	}
