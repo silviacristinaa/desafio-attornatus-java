@@ -17,6 +17,9 @@ Desde a primeira etapa da implementação até criação de testes e entrega eu 
 
 <h2>Informações para a execução do projeto: </h2>
 
+<h3>Deploy feito na AWS EC2:</h3>
+- http://54.146.66.245:8080/api/v1/swagger-ui/index.html
+
 <h3>Pré-requisitos com Docker:</h3>
 
 - Docker instalado
