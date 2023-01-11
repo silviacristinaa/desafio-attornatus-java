@@ -1,6 +1,5 @@
 package com.github.silviacristinaa.attornatustestjava.dtos.requests;
 
-import com.github.silviacristinaa.attornatustestjava.entities.Person;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

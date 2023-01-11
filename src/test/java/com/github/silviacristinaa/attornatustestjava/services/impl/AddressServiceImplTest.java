@@ -32,7 +32,7 @@ public class AddressServiceImplTest {
 
     private static final long ID = 1l;
     private static final String PUBLIC_PLACE = "Test";
-    private static final String ZIP_CODE = "8888888";
+    private static final String ZIP_CODE = "88888888";
     private static final long NUMBER = 1l;
     private static final String CITY = "test";
     private static final String NAME = "Test";
