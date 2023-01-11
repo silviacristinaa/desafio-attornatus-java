@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class AddressServiceImpl implements AddressService {
-    public static final String THERE_IS_ALREADY_A_MAIN_ADDRESS =
+    private static final String THERE_IS_ALREADY_A_MAIN_ADDRESS =
             "There is already a main address, it is only possible to have one";
 
-    public static final String ADDRESS_NOT_FOUND = "Address %s not found";
+    private static final String ADDRESS_NOT_FOUND = "Address %s not found";
 
     private final AddressRepository addressRepository;
     private final ModelMapper modelMapper;

@@ -2,13 +2,10 @@ package com.github.silviacristinaa.attornatustestjava.resources;
 
 import com.github.silviacristinaa.attornatustestjava.dtos.requests.AddressIsMainRequestDto;
 import com.github.silviacristinaa.attornatustestjava.dtos.requests.AddressRequestDto;
-import com.github.silviacristinaa.attornatustestjava.dtos.requests.PersonRequestDto;
 import com.github.silviacristinaa.attornatustestjava.dtos.responses.AddressResponseDto;
-import com.github.silviacristinaa.attornatustestjava.dtos.responses.PersonResponseDto;
 import com.github.silviacristinaa.attornatustestjava.exceptions.BadRequestException;
 import com.github.silviacristinaa.attornatustestjava.exceptions.NotFoundException;
 import com.github.silviacristinaa.attornatustestjava.services.AddressService;
-import com.github.silviacristinaa.attornatustestjava.services.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
