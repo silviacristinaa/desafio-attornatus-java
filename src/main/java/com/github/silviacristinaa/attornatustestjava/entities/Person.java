@@ -3,15 +3,13 @@ package com.github.silviacristinaa.attornatustestjava.entities;
 import java.time.LocalDate;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
 @Entity
 public class Person {
@@ -23,6 +21,6 @@ public class Person {
 	private String name; 
 	@Column(nullable = false)
 	private LocalDate birthDate;
-	@OneToMany(mappedBy = "person")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
 	private List<Address> address;
 }
