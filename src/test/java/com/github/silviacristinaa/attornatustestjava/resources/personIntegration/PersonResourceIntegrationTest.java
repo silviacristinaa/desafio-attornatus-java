@@ -103,7 +103,7 @@ public class PersonResourceIntegrationTest extends IntegrationTests {
 
     @Test
     @Order(8)
-    public void whenFindAllReturnOneValueSuccess() throws Exception {
+    public void whenFindAllReturnSuccess() throws Exception {
         mvc.perform(get("/people").headers(mockHttpHeaders()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("content[0].name", is("Test")))
