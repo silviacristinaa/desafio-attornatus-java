@@ -32,7 +32,7 @@ public class AddressServiceImplTest {
 
     private static final long ID = 1l;
     private static final String PUBLIC_PLACE = "Test";
-    private static final String ZIP_CODE = "test";
+    private static final String ZIP_CODE = "8888888";
     private static final long NUMBER = 1l;
     private static final String CITY = "test";
     private static final String NAME = "Test";
@@ -41,6 +41,8 @@ public class AddressServiceImplTest {
     private static final String PERSON_NOT_FOUND = "Person %s not found";
     private static final String THERE_IS_ALREADY_A_MAIN_ADDRESS =
             "There is already a main address, it is only possible to have one";
+
+    private static final String ADDRESS_NOT_FOUND = "Address %s not found";
 
     private AddressRequestDto addressRequestDto;
     private AddressIsMainRequestDto addressIsMainRequestDto;
@@ -162,7 +164,7 @@ public class AddressServiceImplTest {
     }
 
     @Test
-    void whenTryUpdateFieldIsMainAddressReturnNotFoundException() throws NotFoundException {
+    void whenTryUpdateFieldIsMainAddressWithPersonNotFoundReturnNotFoundException() throws NotFoundException {
         when(personServiceImpl.findById(anyLong())).thenThrow(
                 new NotFoundException(String.format(PERSON_NOT_FOUND, ID)));
 
@@ -170,6 +172,17 @@ public class AddressServiceImplTest {
                 () -> addressServiceImpl.updateFieldIsMainAddress(ID, ID, addressIsMainRequestDto));
 
         assertEquals(String.format(PERSON_NOT_FOUND, ID), exception.getMessage());
+    }
+
+    @Test
+    void whenTryUpdateFieldIsMainAddressWithAddressNotFoundReturnNotFoundException() throws NotFoundException {
+        when(personServiceImpl.findById(Mockito.any())).thenReturn(person);
+        when(addressRepository.findByIdAndPerson(Mockito.any(), Mockito.any())).thenReturn(Optional.empty());
+
+        NotFoundException exception = assertThrows(NotFoundException.class,
+                () -> addressServiceImpl.updateFieldIsMainAddress(ID, ID, addressIsMainRequestDto));
+
+        assertEquals(String.format(ADDRESS_NOT_FOUND, ID), exception.getMessage());
     }
 
     @Test
