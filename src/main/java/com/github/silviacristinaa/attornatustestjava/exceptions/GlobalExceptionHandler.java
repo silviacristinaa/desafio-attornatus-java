@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
 	private static final String EXCEPTION_MSG_ARGUMENTS_NOT_VALID = "Arguments not valid";
 	private static final String NOT_FOUND_MSG = "Not found";
 
-	private static final String BAD_REQUEST = "Bad request";
+	private static final String BAD_REQUEST_MSG = "Bad request";
 
 	private static final String EXCEPTION_LOG_MSG = "e=%s,m=%s";
 	
@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<ErrorMessage> handleMethodBadRequestException(final BadRequestException ex) {
 		logE(ex);
 
-		final ErrorMessage errorMessage = ErrorMessage.builder().message(BAD_REQUEST)
+		final ErrorMessage errorMessage = ErrorMessage.builder().message(BAD_REQUEST_MSG)
 				.errors(Arrays.asList(ex.getMessage())).build();
 		return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 	}
