@@ -22,6 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class AddressResourceIntegrationTest extends IntegrationTests {
 
+    private static final String EXCEPTION_MSG_ARGUMENTS_NOT_VALID = "Arguments not valid";
+    private static final String NOT_FOUND_MSG = "Not found";
+    private static final String BAD_REQUEST_MSG = "Bad request";
     private static final String PERSON_NOT_FOUND = "Person %s not found";
     private static final String ADDRESS_NOT_FOUND = "Address %s not found";
     private static final String THERE_IS_ALREADY_A_MAIN_ADDRESS =
@@ -45,7 +48,7 @@ public class AddressResourceIntegrationTest extends IntegrationTests {
                         .content(objectMapper.writeValueAsString(
                                 AddressResourceIntegrationBody.addressBadRequest())))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("message", is("Arguments not valid")));
+                .andExpect(jsonPath("message", is(EXCEPTION_MSG_ARGUMENTS_NOT_VALID)));
     }
 
     @Test
@@ -55,7 +58,7 @@ public class AddressResourceIntegrationTest extends IntegrationTests {
                         .content(objectMapper.writeValueAsString(
                                 AddressResourceIntegrationBody.addressCreateSuccess())))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("message", is("Not found")))
+                .andExpect(jsonPath("message", is(NOT_FOUND_MSG)))
                 .andExpect(jsonPath("errors.[0]", is(String.format(PERSON_NOT_FOUND, ID))));
     }
 
@@ -80,7 +83,7 @@ public class AddressResourceIntegrationTest extends IntegrationTests {
                         .content(objectMapper.writeValueAsString(
                                 AddressResourceIntegrationBody.addressCreateSuccess())))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("message", is("Bad request")))
+                .andExpect(jsonPath("message", is(BAD_REQUEST_MSG)))
                 .andExpect(jsonPath("errors.[0]", is(THERE_IS_ALREADY_A_MAIN_ADDRESS)));
     }
 
@@ -90,7 +93,7 @@ public class AddressResourceIntegrationTest extends IntegrationTests {
         mvc.perform(get("/people/{id}/address", person.getId()).headers(mockHttpHeaders()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("content[0].publicPlace", is("Test")))
-                .andExpect(jsonPath("content[0].zipCode", is("8888888")))
+                .andExpect(jsonPath("content[0].zipCode", is("88888888")))
                 .andExpect(jsonPath("content[0].number", is(1)))
                 .andExpect(jsonPath("content[0].city", is("test")))
                 .andExpect(jsonPath("content[0].main", is(true)));
@@ -101,7 +104,7 @@ public class AddressResourceIntegrationTest extends IntegrationTests {
     public void whenFindAllPersonAddressesWithPersonNotFoundReturnNotFoundException() throws Exception {
         mvc.perform(get("/people/{id}/address", ID).headers(mockHttpHeaders()))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("message", is("Not found")))
+                .andExpect(jsonPath("message", is(NOT_FOUND_MSG)))
                 .andExpect(jsonPath("errors.[0]", is(String.format(PERSON_NOT_FOUND, ID))));
     }
 
@@ -113,7 +116,7 @@ public class AddressResourceIntegrationTest extends IntegrationTests {
                 .content(objectMapper.writeValueAsString(
                         AddressResourceIntegrationBody.addressUpdateFieldIsMain(false))))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("message", is("Not found")))
+                .andExpect(jsonPath("message", is(NOT_FOUND_MSG)))
                 .andExpect(jsonPath("errors.[0]", is(String.format(ADDRESS_NOT_FOUND, ID))));
     }
 
@@ -125,7 +128,7 @@ public class AddressResourceIntegrationTest extends IntegrationTests {
                         .content(objectMapper.writeValueAsString(
                                 AddressResourceIntegrationBody.addressUpdateFieldIsMain(false))))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("message", is("Not found")))
+                .andExpect(jsonPath("message", is(NOT_FOUND_MSG)))
                 .andExpect(jsonPath("errors.[0]", is(String.format(PERSON_NOT_FOUND, ID))));
     }
 
@@ -146,7 +149,7 @@ public class AddressResourceIntegrationTest extends IntegrationTests {
     @Test
     @Order(10)
     public void whenUpdateFieldIsMainAddressWithIsMainTrueReturnBadRequestException() throws Exception {
-        addressRepository.save(new Address(null, "Test", "8888888",
+        addressRepository.save(new Address(null, "Test", "88888888",
                 1l, "test", person, true));
 
         mvc.perform(patch("/people/{id}/address/{address-id}", person.getId(), addressId)
@@ -154,7 +157,7 @@ public class AddressResourceIntegrationTest extends IntegrationTests {
                         .content(objectMapper.writeValueAsString(
                                 AddressResourceIntegrationBody.addressUpdateFieldIsMain(true))))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("message", is("Bad request")))
+                .andExpect(jsonPath("message", is(BAD_REQUEST_MSG)))
                 .andExpect(jsonPath("errors.[0]", is(THERE_IS_ALREADY_A_MAIN_ADDRESS)));
     }
 }

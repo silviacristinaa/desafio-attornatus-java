@@ -24,9 +24,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class AddressServiceImpl implements AddressService {
+
     private static final String THERE_IS_ALREADY_A_MAIN_ADDRESS =
             "There is already a main address, it is only possible to have one";
-
     private static final String ADDRESS_NOT_FOUND = "Address %s not found";
 
     private final AddressRepository addressRepository;

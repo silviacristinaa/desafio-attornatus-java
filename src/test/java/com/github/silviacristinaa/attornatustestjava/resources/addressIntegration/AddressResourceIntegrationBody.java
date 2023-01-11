@@ -6,11 +6,12 @@ import com.github.silviacristinaa.attornatustestjava.dtos.requests.AddressReques
 public class AddressResourceIntegrationBody {
 
     public static AddressRequestDto addressBadRequest() {
-        return new AddressRequestDto(null, null, 1l, "test", true);
+        return new AddressRequestDto(null, null,
+                1l, "test", true);
     }
 
     public static AddressRequestDto addressCreateSuccess() {
-        return new AddressRequestDto("Test", "8888888", 1l, "test", true);
+        return new AddressRequestDto("Test", "88888888", 1l, "test", true);
     }
 
     public static AddressIsMainRequestDto addressUpdateFieldIsMain(boolean isMain) {

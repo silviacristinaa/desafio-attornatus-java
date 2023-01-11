@@ -18,7 +18,6 @@ public class GlobalExceptionHandler {
 	private static final String EXCEPTION_MSG_UNEXPECTED_ERROR = "Unexpected error";
 	private static final String EXCEPTION_MSG_ARGUMENTS_NOT_VALID = "Arguments not valid";
 	private static final String NOT_FOUND_MSG = "Not found";
-
 	private static final String BAD_REQUEST_MSG = "Bad request";
 
 	private static final String EXCEPTION_LOG_MSG = "e=%s,m=%s";

@@ -15,7 +15,13 @@ public class GlobalExceptionHandlerTest {
 
 	private static final String NOT_FOUND_MSG = "Not found";
 	private static final String BAD_REQUEST_MSG = "Bad request";
-	
+	private static final String THERE_IS_ALREADY_A_MAIN_ADDRESS =
+			"There is already a main address, it is only possible to have one";
+	private static final String PERSON_NOT_FOUND = "Person %s not found";
+
+	private static final long ID = 1l;
+	private static final int INDEX = 0;
+
 	@InjectMocks
 	private GlobalExceptionHandler globalExceptionHandler;
 	
@@ -23,7 +29,7 @@ public class GlobalExceptionHandlerTest {
 	void whenNotFoundExceptionReturnResponseEntity() {
 		ResponseEntity<ErrorMessage> response = globalExceptionHandler
 				.handleMethodNotFoundException(
-						new NotFoundException(String.format("Person %s not found", 1l)));
+						new NotFoundException(String.format(PERSON_NOT_FOUND, ID)));
 		
 		assertNotNull(response);
 		assertNotNull(response.getBody());
@@ -31,14 +37,14 @@ public class GlobalExceptionHandlerTest {
 		assertEquals(ResponseEntity.class, response.getClass());
 		assertEquals(ErrorMessage.class, response.getBody().getClass());
 		assertEquals(NOT_FOUND_MSG, response.getBody().getMessage());
-		assertEquals("Person 1 not found", response.getBody().getErrors().get(0));
+		assertEquals(String.format(PERSON_NOT_FOUND, ID), response.getBody().getErrors().get(INDEX));
 	}
 
 	@Test
 	void whenBadRequestExceptionReturnResponseEntity() {
 		ResponseEntity<ErrorMessage> response = globalExceptionHandler
 				.handleMethodBadRequestException(
-						new BadRequestException("There is already a main address, it is only possible to have one"));
+						new BadRequestException(THERE_IS_ALREADY_A_MAIN_ADDRESS));
 
 		assertNotNull(response);
 		assertNotNull(response.getBody());
@@ -46,7 +52,6 @@ public class GlobalExceptionHandlerTest {
 		assertEquals(ResponseEntity.class, response.getClass());
 		assertEquals(ErrorMessage.class, response.getBody().getClass());
 		assertEquals(BAD_REQUEST_MSG, response.getBody().getMessage());
-		assertEquals("There is already a main address, it is only possible to have one",
-				response.getBody().getErrors().get(0));
+		assertEquals(THERE_IS_ALREADY_A_MAIN_ADDRESS, response.getBody().getErrors().get(INDEX));
 	}
 }
